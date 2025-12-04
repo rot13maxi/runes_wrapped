@@ -147,11 +147,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function resetToLanding() {
-        // Hide all screens
+        // Hide all screens with transition
         screens.forEach((screen, index) => {
             if (index > 0) {
-                screen.classList.add('hidden');
-                screen.classList.remove('active', 'exiting');
+                screen.classList.remove('active');
+                screen.classList.add('exiting');
+                
+                setTimeout(() => {
+                    screen.classList.add('hidden');
+                    screen.classList.remove('exiting');
+                }, 600);
             }
         });
 
@@ -166,31 +171,97 @@ document.addEventListener('DOMContentLoaded', function() {
         Object.values(progressBars).flat().forEach(bar => {
             if (bar) {
                 bar.style.width = '0%';
-                bar.classList.remove('animating');
+                bar.classList.remove('animating', 'complete');
             }
         });
+
+        // Reset chart
+        const chartLine = document.getElementById('chart-line');
+        const chartCaption = document.getElementById('chart-caption');
+        const portfolioValue = document.getElementById('portfolio-value');
+        const chartFrame = document.getElementById('chart-frame');
+        
+        if (chartLine) {
+            chartLine.setAttribute('d', '');
+            chartLine.style.opacity = '0';
+        }
+        if (chartCaption) {
+            chartCaption.style.opacity = '0';
+            chartCaption.style.animation = 'none';
+        }
+        if (portfolioValue) {
+            portfolioValue.style.opacity = '0';
+            portfolioValue.style.animation = 'none';
+        }
+        if (chartFrame) {
+            chartFrame.style.animation = 'none';
+        }
 
         // Reset submit button state
         submitBtn.style.opacity = '1';
         submitBtn.style.pointerEvents = 'auto';
         submitBtn.querySelector('span').textContent = 'See my year in runes';
         
-        // Clear input
+        // Clear input and error
         addressInput.value = '';
+        hideError();
         
-        // Show landing section
-        currentScreenIndex = 0;
-        landingSection.classList.remove('hidden');
-        landingSection.classList.add('active');
+        // Show landing section after transition
+        setTimeout(() => {
+            currentScreenIndex = 0;
+            landingSection.classList.remove('hidden');
+            landingSection.classList.add('active');
+        }, 300);
+    }
+
+    const errorMessage = document.getElementById('error-message');
+
+    function validateAddress(address) {
+        return address.trim().toLowerCase().startsWith('bc1p');
+    }
+
+    function showError() {
+        addressInput.classList.add('error');
+        if (errorMessage) {
+            errorMessage.classList.add('show');
+        }
+    }
+
+    function hideError() {
+        addressInput.classList.remove('error');
+        if (errorMessage) {
+            errorMessage.classList.remove('show');
+        }
     }
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+        const address = addressInput.value.trim();
+        
+        if (!validateAddress(address)) {
+            showError();
+            return;
+        }
+        
+        hideError();
         startJourney();
     });
 
-    checkAnotherBtn.addEventListener('click', function() {
-        resetToLanding();
+    // Validate on input change
+    addressInput.addEventListener('input', function() {
+        if (this.value.trim() && !validateAddress(this.value)) {
+            showError();
+        } else {
+            hideError();
+        }
+    });
+
+    // Use event delegation for the check another button - just reload the page
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'check-another-btn') {
+            e.preventDefault();
+            window.location.reload();
+        }
     });
 
     // Add some interactivity to the input

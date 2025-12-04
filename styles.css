@@ -156,6 +156,29 @@ body {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
+.address-input.error {
+    border-color: #ff0000;
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.error-message {
+    color: #ff0000;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: -1rem;
+    margin-bottom: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    min-height: 1.2rem;
+}
+
+.error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .submit-btn {
     padding: 1.2rem 2.5rem;
     font-size: 1.2rem;
