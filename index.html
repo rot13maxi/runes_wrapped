@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runes Wrapped 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Landing Section -->
+        <div id="landing" class="section landing-section active">
+            <div class="content-wrapper">
+                <h1 class="main-title">Runes Wrapped</h1>
+                <h2 class="subtitle">2025</h2>
+                <p class="description">See your year in Runes</p>
+                
+                <form id="address-form" class="address-form">
+                    <input 
+                        type="text" 
+                        id="runes-address" 
+                        class="address-input" 
+                        placeholder="Enter your Runes address"
+                        autocomplete="off"
+                    >
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span>See my year in runes</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Screen 1: Aggregating wallet history -->
+        <div id="screen-1" class="section progress-screen hidden">
+            <div class="screen-content">
+                <h2 class="screen-title">Aggregating wallet history</h2>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-1"></div>
+                    </div>
+                </div>
+                <button class="continue-btn hidden" id="btn-1">Continue</button>
+            </div>
+        </div>
+
+        <!-- Screen 2: Fetching marketplace data -->
+        <div id="screen-2" class="section progress-screen hidden">
+            <div class="screen-content">
+                <h2 class="screen-title">Fetching marketplace and historical pricing data</h2>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-2a"></div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-2b"></div>
+                    </div>
+                </div>
+                <button class="continue-btn hidden" id="btn-2">Continue</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Crunching numbers -->
+        <div id="screen-3" class="section progress-screen hidden">
+            <div class="screen-content">
+                <h2 class="screen-title">Crunching the numbers</h2>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-3"></div>
+                    </div>
+                </div>
+                <button class="continue-btn hidden" id="btn-3">Continue</button>
+            </div>
+        </div>
+
+        <!-- Screen 4: Busy year -->
+        <div id="screen-4" class="section text-screen hidden">
+            <div class="screen-content">
+                <h2 class="screen-title-large">It's been a busy year!</h2>
+                <button class="continue-btn" id="btn-4">Continue</button>
+            </div>
+        </div>
+
+        <!-- Screen 5: Ups and downs -->
+        <div id="screen-5" class="section text-screen hidden">
+            <div class="screen-content">
+                <h2 class="screen-title-large">Lots of ups and downs</h2>
+                <button class="continue-btn" id="btn-5">Continue</button>
+            </div>
+        </div>
+
+        <!-- Screen 6: Surprises -->
+        <div id="screen-6" class="section text-screen hidden">
+            <div class="screen-content">
+                <h2 class="screen-title-large">Looks like a few surprises in here</h2>
+                <button class="continue-btn" id="btn-6">Continue</button>
+            </div>
+        </div>
+
+        <!-- Screen 7: Ready? -->
+        <div id="screen-7" class="section text-screen hidden">
+            <div class="screen-content">
+                <h2 class="screen-title-large">Are you ready to see your review for 2025?</h2>
+                <button class="continue-btn" id="btn-7">Continue</button>
+            </div>
+        </div>
+
+        <!-- Screen 8: Tabulating results -->
+        <div id="screen-8" class="section progress-screen hidden">
+            <div class="screen-content">
+                <h2 class="screen-title">Tabulating final results</h2>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-8"></div>
+                    </div>
+                </div>
+                <button class="continue-btn hidden" id="btn-8">Continue</button>
+            </div>
+        </div>
+
+        <!-- Screen 9: Here's your review -->
+        <div id="screen-9" class="section text-screen hidden">
+            <div class="screen-content">
+                <h2 class="screen-title-large">Here's your runes in review</h2>
+                <button class="continue-btn" id="btn-9">Continue</button>
+            </div>
+        </div>
+
+        <!-- Screen 10: You got wrecked -->
+        <div id="screen-10" class="section reveal-section hidden">
+            <div class="reveal-content">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="wrecked-container">
+                            <h1 class="wrecked-title">You got</h1>
+                            <h1 class="wrecked-word">WRECKED</h1>
+                        </div>
+                        <div class="chart-container">
+                            <svg class="price-chart" id="price-chart" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet" style="overflow: visible;">
+                                <defs>
+                                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#ee5a6f;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <rect x="0" y="0" width="400" height="200" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" id="chart-frame"/>
+                                <path id="chart-line" fill="none" stroke="url(#lineGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <div class="chart-caption" id="chart-caption">-100%</div>
+                            <div class="portfolio-value" id="portfolio-value">portfolio value: $0</div>
+                        </div>
+                        <button class="check-another-btn" id="check-another-btn">Check another address</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SVG Doodles Container -->
+        <div class="doodles-container">
+            <svg class="doodle" id="doodle-1" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.6" />
+                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:0.6" />
+                    </linearGradient>
+                </defs>
+                <circle cx="50" cy="50" r="30" fill="url(#gradient1)"/>
+            </svg>
+            <svg class="doodle" id="doodle-2" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f093fb;stop-opacity:0.6" />
+                        <stop offset="100%" style="stop-color:#4facfe;stop-opacity:0.6" />
+                    </linearGradient>
+                </defs>
+                <polygon points="50,20 80,70 20,70" fill="url(#gradient2)"/>
+            </svg>
+            <svg class="doodle" id="doodle-3" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00f2fe;stop-opacity:0.6" />
+                        <stop offset="100%" style="stop-color:#667eea;stop-opacity:0.6" />
+                    </linearGradient>
+                </defs>
+                <path d="M 50 50 Q 70 30, 90 50 T 90 50 Q 70 70, 50 50" fill="url(#gradient3)"/>
+            </svg>
+            <svg class="doodle" id="doodle-4" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.5" />
+                        <stop offset="100%" style="stop-color:#ee5a6f;stop-opacity:0.5" />
+                    </linearGradient>
+                </defs>
+                <circle cx="50" cy="50" r="25" fill="url(#gradient4)"/>
+            </svg>
+            <svg class="doodle" id="doodle-5" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="gradient5" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.5" />
+                        <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:0.5" />
+                    </linearGradient>
+                </defs>
+                <polygon points="50,15 75,60 25,60" fill="url(#gradient5)"/>
+            </svg>
+            <svg class="doodle" id="doodle-6" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="gradient6" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#764ba2;stop-opacity:0.5" />
+                        <stop offset="100%" style="stop-color:#f093fb;stop-opacity:0.5" />
+                    </linearGradient>
+                </defs>
+                <path d="M 20 50 Q 50 20, 80 50 T 80 50 Q 50 80, 20 50" fill="url(#gradient6)"/>
+            </svg>
+        </div>
+
+        <!-- Background particles -->
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
